@@ -72,7 +72,7 @@ jobs:
 
       - name: Generate review
         id: pragent
-        uses: the-pr-agent/pr-agent@v0.43.0
+        uses: the-pr-agent/pr-agent@4ebd5c5333c6ef21509e7304d27969eb825e6f22 # v0.43.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OPENROUTER__KEY: ${{ secrets.OPENROUTER_API_KEY }}
@@ -163,7 +163,7 @@ jobs:
     timeout-minutes: 20
     name: Answer /describe and /ask
     steps:
-      - uses: the-pr-agent/pr-agent@v0.43.0
+      - uses: the-pr-agent/pr-agent@4ebd5c5333c6ef21509e7304d27969eb825e6f22 # v0.43.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OPENROUTER__KEY: ${{ secrets.OPENROUTER_API_KEY }}
