@@ -31,10 +31,15 @@ permissions:
 
 jobs:
   review:
+    # Fork PRs get no secrets, so skip them instead of failing. Comment
+    # commands only run for people with write access, so strangers on a
+    # public repo can't spend the OpenRouter key.
     if: >-
       github.event.sender.type != 'Bot' &&
-      (github.event_name == 'pull_request' ||
-       (github.event.issue.pull_request && github.event.comment.body == '/review'))
+      ((github.event_name == 'pull_request' &&
+        github.event.pull_request.head.repo.full_name == github.repository) ||
+       (github.event.issue.pull_request && github.event.comment.body == '/review' &&
+        contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association)))
     strategy:
       fail-fast: false
       matrix:
@@ -158,6 +163,7 @@ jobs:
     if: >-
       github.event.sender.type != 'Bot' &&
       github.event.issue.pull_request &&
+      contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association) &&
       (github.event.comment.body == '/describe' || startsWith(github.event.comment.body, '/ask '))
     runs-on: ubuntu-latest
     timeout-minutes: 20

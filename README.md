@@ -16,6 +16,13 @@ Every reviewer runs in parallel on each push and posts or updates its own
 comment. `/review` in a comment reruns them. `/describe` and `/ask <question>`
 run only when someone asks. Nothing rewrites the PR body on its own.
 
+PRs from forks are skipped because GitHub withholds secrets from them. Comment
+commands only work for the owner, members, and collaborators. To review a
+fork PR, comment `/review` yourself.
+
+Callers use `@main` on purpose, so one commit here changes every repo. Only
+I can push here, and `main` blocks force pushes and deletion.
+
 ## Change models
 
 Edit the `reviewers` default in `.github/workflows/review.yml`. Every repo on
