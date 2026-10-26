@@ -41,3 +41,8 @@ For a client whose code can't go to just any provider, use only models the
 client approved, and use an OpenRouter key whose account settings allow only
 zero-data-retention providers. The repo's AGENTS.md lists the approved
 providers.
+
+## Tests
+
+`npm test` runs the scripts embedded in `review.yml` against mocked GitHub
+calls. Run it after editing either script.
